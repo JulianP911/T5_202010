@@ -5,11 +5,10 @@ import java.io.FileReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
+
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -17,7 +16,8 @@ import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
 
 import model.Comparendo;
-import model.data_structures.MaxColaCP;
+import model.LlaveComparendo;
+import model.data_structures.LinearProbingHash;
 
 /**
  * Definicion del modelo del mundo
@@ -88,13 +88,12 @@ public class Modelo {
 	}
 
 	/**
-	 * Convierte la lista de objetos cargados a cola de prioridad
+	 * Convierte la lista de objetos cargados en una tabla de hash
 	 */
-	public MaxColaCP<Comparendo> darColaPrioridadMaxCP()
+	public LinearProbingHash<LlaveComparendo, Comparendo> darTablaHashLinearProbing()
 	{
-		MaxColaCP<Comparendo> colaPrioridad = new MaxColaCP<Comparendo>();
+		LinearProbingHash<LlaveComparendo, Comparendo> tablaLinearProbing = new LinearProbingHash<LlaveComparendo, Comparendo>();
 		datos1 = cargarDatos();
-		shuffle(datos1);
 
 		Iterator<Comparendo> it = datos1.iterator();
 		while(it.hasNext())
@@ -102,59 +101,12 @@ public class Modelo {
 			for(int i = 0; i < datos1.size(); i++)
 			{
 				Comparendo elementoActual = it.next();
-				colaPrioridad.insert(new Comparendo(elementoActual.getObjective(), elementoActual.getFecha_hora(), elementoActual.getDes_infrac(), elementoActual.getMedio_dete(), elementoActual.getClase_vehi(), elementoActual.getTipo_servi(), elementoActual.getInfraccion(), elementoActual.getLocalidad(), elementoActual.getMunicipio(), elementoActual.getLongitud(), elementoActual.getLatitud()));
+				tablaLinearProbing.put(new LlaveComparendo(elementoActual.getFecha_hora(), elementoActual.getClase_vehi(), elementoActual.getInfraccion()), new Comparendo(elementoActual.getObjective(), elementoActual.getFecha_hora(), elementoActual.getDes_infrac(), elementoActual.getMedio_dete(), elementoActual.getClase_vehi(), elementoActual.getTipo_servi(), elementoActual.getInfraccion(), elementoActual.getLocalidad(), elementoActual.getMunicipio(), elementoActual.getLongitud(), elementoActual.getLatitud()));
 			}
 		}
 
-		return colaPrioridad;
+		return tablaLinearProbing;
 	}
-
-	// TODO Convertir la lista en MaxHeapCP
-
-	/**
-	 * Desorganiza la lista y la vuelve totalmente en desorden utilizando Random
-	 * @param list Lista de comparendos
-	 */
-	public static void shuffle(List<Comparendo> list) 
-	{
-		Random random = new Random(); 
-		int count = list.size() - 1;
-		for (int i = count; i > 1; i--) 
-		{
-			Collections.swap(list, i, random.nextInt(i));
-		} 
-	}
-
-	/**
-	 * Da los comparendos que se encuentran mas hacia el norte
-	 * @param listaTipo Lista del clase de vehiculos
-	 * @return MaxColaCP con los comparendos mas al norte
-	 */
-	public MaxColaCP<Comparendo> darComparendosMasNorteYTipo(List<String> listaTipo)
-	{
-		MaxColaCP<Comparendo> colaMasNorte = new MaxColaCP<Comparendo>();
-
-		String tipo[] = new String[listaTipo.size()];
-		for(int i = 0; i < listaTipo.size(); i++)
-		{
-			tipo[i] = listaTipo.get(i);
-		}
-
-		for(int i = 0; i < tipo.length; i++)
-		{
-			Iterator<Comparendo> comparendosMaxCola = darColaPrioridadMaxCP().iterator();
-			while(comparendosMaxCola.hasNext())
-			{
-				Comparendo elementoActual = comparendosMaxCola.next();
-				if(elementoActual.getClase_vehi().equals(tipo[i]))
-				{
-					colaMasNorte.insert(new Comparendo(elementoActual.getObjective(), elementoActual.getFecha_hora(), elementoActual.getDes_infrac(), elementoActual.getMedio_dete(), elementoActual.getClase_vehi(), elementoActual.getTipo_servi(), elementoActual.getInfraccion(), elementoActual.getLocalidad(), elementoActual.getMunicipio(), elementoActual.getLongitud(), elementoActual.getLatitud()));
-				}
-			}
-		}
-		
-		return colaMasNorte;	
-	}
-	
-	// TODO hacer el metodo del requerimiento 2 puede ser parecido al de arriba
 }
+
+

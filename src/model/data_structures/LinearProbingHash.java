@@ -8,7 +8,7 @@ package model.data_structures;
  * @param <K> Key (llave)
  * @param <V> Value (Valor)
  */
-public class LinearProbingHash<K, V>
+public class LinearProbingHash<K extends Comparable<K>, V >
 {
 	// Atributos
 
@@ -56,8 +56,8 @@ public class LinearProbingHash<K, V>
 	{
 		m = capacity;
 		n = 0;
-		keys = (K[]) new Object[m];
-		vals = (V[]) new Object[m];
+		keys = (K[]) new Comparable[m];
+		vals = (V[]) new Comparable[m];
 	}
 
 	/**

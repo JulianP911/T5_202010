@@ -3,6 +3,10 @@ package model;
 import java.util.Date;
 import java.util.Objects;
 
+/**
+ * Clase LlaveComparendo que tiene los tres atributos mencionados en el taller
+ * @author Julian Padilla - Pablo Pastrana
+ */
 public class LlaveComparendo implements Comparable<LlaveComparendo>
 {
 	/**
@@ -20,6 +24,8 @@ public class LlaveComparendo implements Comparable<LlaveComparendo>
 	 */
 	private String infraccion;
 	
+	// Metodo Constructor
+	
 	public LlaveComparendo(Date pFecha, String pClase_Vehi, String pInfraccion) 
 	{
 		fecha_hora = pFecha;
@@ -27,6 +33,9 @@ public class LlaveComparendo implements Comparable<LlaveComparendo>
 		infraccion = pInfraccion;
 	}
 
+	/**
+	 * HashCode para ser utilisado en la tabla de hash
+	 */
 	@Override
 	public int hashCode()
 	{
@@ -37,6 +46,9 @@ public class LlaveComparendo implements Comparable<LlaveComparendo>
 		return hash;
 	}
 
+	/**
+	 * Equals para verificar si dos llaves son iguales o no
+	 */
 	@Override
 	public boolean equals(Object obj) 
 	{
@@ -68,25 +80,27 @@ public class LlaveComparendo implements Comparable<LlaveComparendo>
 		return true;
 	}
 
+	/**
+	 * CompareTo para verificar si estan organisados
+	 */
 	@Override
 	public int compareTo(LlaveComparendo pObjeto) 
 	{
 		int resultado = 0;
 		
-		if(this.fecha_hora.compareTo(pObjeto.fecha_hora) < 0)
+		if(this.fecha_hora.after(pObjeto.fecha_hora))
 		{
 			resultado = -1;
 		}
-		else if(this.fecha_hora.compareTo(pObjeto.fecha_hora) == 0)
+		else if(this.fecha_hora.equals(pObjeto.fecha_hora))
 		{
 			resultado = 0;
 		}
-		else if(this.fecha_hora.compareTo(pObjeto.fecha_hora) > 0)
+		else if(this.fecha_hora.before(pObjeto.fecha_hora))
 		{
 			resultado = 1;
 		}
 
 		return resultado;
 	}
-
 }

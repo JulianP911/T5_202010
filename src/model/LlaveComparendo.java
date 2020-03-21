@@ -7,7 +7,7 @@ import java.util.Objects;
  * Clase LlaveComparendo que tiene los tres atributos mencionados en el taller
  * @author Julian Padilla - Pablo Pastrana
  */
-public class LlaveComparendo implements Comparable<LlaveComparendo>
+public final class LlaveComparendo implements Comparable<LlaveComparendo>
 {
 	/**
 	 * Fecha en la cual fue tomado el comparendo
@@ -32,6 +32,21 @@ public class LlaveComparendo implements Comparable<LlaveComparendo>
 		clase_vehi = pClase_Vehi;
 		infraccion = pInfraccion;
 	}
+	
+	public Date getFecha_Hora()
+	{
+		return fecha_hora;
+	}
+	
+	public String getClase_Vehi()
+	{
+		return clase_vehi;
+	}
+	
+	public String getInfraccion()
+	{
+		return infraccion;
+	}
 
 	/**
 	 * HashCode para ser utilisado en la tabla de hash
@@ -49,22 +64,21 @@ public class LlaveComparendo implements Comparable<LlaveComparendo>
 	/**
 	 * Equals para verificar si dos llaves son iguales o no
 	 */
-	@Override
-	public boolean equals(Object obj) 
+	public boolean equals(LlaveComparendo pLLaveComparendo) 
 	{
-		if (this == obj) 
+		if (this == pLLaveComparendo) 
 		{
 			return true;
 		}
-		if (obj == null) 
+		if (pLLaveComparendo == null) 
 		{
 			return false;
 		}
-		if (getClass() != obj.getClass()) 
+		if (getClass() != pLLaveComparendo.getClass()) 
 		{
 			return false;
 		}
-		final LlaveComparendo other = (LlaveComparendo) obj;
+		final LlaveComparendo other = (LlaveComparendo) pLLaveComparendo;
 		if (!Objects.equals(this.fecha_hora, other.fecha_hora)) 
 		{
 			return false;

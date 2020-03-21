@@ -88,7 +88,7 @@ public class Modelo {
 	}
 
 	/**
-	 * Convierte la lista de objetos cargados en una tabla de hash
+	 * Convierte la lista de objetos cargados en una tabla de hash - Linear Probing
 	 */
 	public LinearProbingHash<LlaveComparendo, Comparendo> darTablaHashLinearProbing()
 	{
@@ -107,6 +107,48 @@ public class Modelo {
 
 		return tablaLinearProbing;
 	}
+	
+	// TODO Convertir la lista de objetos cargados en una tabla de hash - Separate Chainging
+	
+	/**
+	 * Calcular el tiempo en hacer get en un rango de 0 a 10000, haciendo de la forma aleatoria, 8000 llaves existente y 2000 llaves no esxistentes
+	 */
+	public void darConsultasGetLinearProbing()
+	{
+		LinearProbingHash<LlaveComparendo, Comparendo> tablaLinearProbing = darTablaHashLinearProbing();
+		Iterator<LlaveComparendo> resultado1 = tablaLinearProbing.keys().iterator();
+		int j = 0;
+
+		while(resultado1.hasNext() && j <= 10000)
+		{
+			LlaveComparendo llavesExistente = resultado1.next();
+			LlaveComparendo llavesNoExistente = new LlaveComparendo(llavesExistente.getFecha_Hora(), "Particular", "C50");
+			int numeroAleatorio1 = (int) (Math.random()* 8000);
+			int numeroAleatorio2 = (int) (Math.random()* 2000);
+			
+			for(int i = 0; i <= numeroAleatorio1; i++)
+			{
+				tablaLinearProbing.get(llavesExistente);
+			}
+			
+			for(int i = 0; i <= numeroAleatorio2; i++)
+			{
+				tablaLinearProbing.get(llavesNoExistente);
+			}
+			
+			j++;
+		}
+	}
+
+	/**
+	 * Calcular el tiempo en hacer get en un rango de 0 a 10000, haciendo de la forma aleatoria, 8000 llaves existente y 2000 llaves no esxistentes
+	 */
+	public void darConsultasGetSeparateChaining() 
+	{
+		// TODO Realiaza el metodo del requerimiento 3 parecido al anterior
+		// TODO No olvidar hacer los test y llenar el documento
+	}
+	
 }
 
 

@@ -305,15 +305,15 @@ public class Comparendo implements Comparable<Comparendo>
 	{
 		int resultado = 0;
 
-		if(this.getLatitud() < pItem.getLatitud())         // Compara la latitud si es menor
+		if(this.getObjective() < pItem.getObjective())         // Compara el objective si es menor
 		{
 			resultado  = 1;
 		}
-		else if(this.getLatitud() == pItem.getLatitud())   // Compara la latitud si es igual
+		else if(this.getObjective() == pItem.getObjective())   // Compara el objective si es igual
 		{
 			resultado = 0;
 		}
-		else if(this.getLatitud() > pItem.getLatitud())    // Compara la latitud si es mayor
+		else if(this.getObjective() > pItem.getObjective())    // Compara el objective si es mayor
 		{
 			resultado = -1;
 		}

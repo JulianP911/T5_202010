@@ -126,7 +126,10 @@ public class LinearProbingHash<K extends Comparable<K>, V >
 	public void put(K key, V val) 
 	{
 		boolean agrego = false;
-		if (key == null) throw new IllegalArgumentException("first argument to put() is null");
+		if (key == null) 
+		{
+			throw new IllegalArgumentException("first argument to put() is null");
+		}
 
 		if (val == null)
 		{

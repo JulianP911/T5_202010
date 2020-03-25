@@ -9,7 +9,7 @@
 	},
 	"features": [
 		{
-			"typ/e": "Feature",
+			"type": "Feature",
 			"properties": {
 				"OBJECTID": 29042,
 				"FECHA_HORA": "2018-11-11T11:11:00.000Z",

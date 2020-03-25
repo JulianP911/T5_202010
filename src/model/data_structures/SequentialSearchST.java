@@ -97,8 +97,9 @@ public class SequentialSearchST<K, V >
 	        }
 
 	        for (Node x = first; x != null; x = x.next) {
-	            if (key.equals(x.key)) {
-	                x.val = val;
+	            if (key.equals(x.key)) 
+	            {
+	            	x.next = new Node(key, val, x.next);
 	                return;
 	            }
 	        }
@@ -150,17 +151,6 @@ public class SequentialSearchST<K, V >
 	    	 
 	    	 return vals;
 	    }
-
-
-	    /**
-	     * Returns all keys in the symbol table as an {@code Iterable}.
-	     * To iterate over all of the keys in the symbol table named {@code st},
-	     * use the foreach notation: {@code for (Key key : st.keys())}.
-	     *
-	     * @return all keys in the symbol table
-	     */
-	   // falta Iterator, pero no es necesario
-
 	
 	
 }

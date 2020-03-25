@@ -152,13 +152,20 @@ public class SeparateChainingHash <K extends Comparable<K>, V >
 		{
 			if (st[i] != null) 
 			{
-				for (int j = 0; j < m; j++)
+				for (int j = 0; j < st[i].size(); j++)
 				{
+					
 					if (st[i].keys().get(j) != null)
 						queue.enqueue(st[i].keys().get(j));
 				}
 			}
 		}
+		
+
+		//for (int ñ = 0; ñ < st[0].keys().size() ; ñ++)
+		//{
+		//	System.out.println( "este: " + st[0].keys().get(ñ) );
+		//}
 		
 		return queue;
 		
@@ -183,6 +190,8 @@ public class SeparateChainingHash <K extends Comparable<K>, V >
    		return queue;
    		
    	}
+    
+   
     
 
 

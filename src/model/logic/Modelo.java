@@ -120,12 +120,16 @@ public class Modelo {
 		Iterator<Comparendo> it = datos1.iterator();
 		while(it.hasNext())
 		{
+			
 			for(int i = 0; i < datos1.size(); i++)
 			{
+
 				Comparendo elementoActual = it.next();
 				tablaSeparateChaining.put(new LlaveComparendo(elementoActual.getFecha_hora(), elementoActual.getClase_vehi(), elementoActual.getInfraccion()), new Comparendo(elementoActual.getObjective(), elementoActual.getFecha_hora(), elementoActual.getDes_infrac(), elementoActual.getMedio_dete(), elementoActual.getClase_vehi(), elementoActual.getTipo_servi(), elementoActual.getInfraccion(), elementoActual.getLocalidad(), elementoActual.getMunicipio(), elementoActual.getLongitud(), elementoActual.getLatitud()));
 			}
 		}
+		
+		//System.out.println(tablaSeparateChaining.size());
 
 		return tablaSeparateChaining;
 	}
@@ -168,6 +172,31 @@ public class Modelo {
 	{
 		// TODO Realiaza el metodo del requerimiento 3 parecido al anterior
 		// TODO No olvidar hacer los test y llenar el documento
+		
+		SeparateChainingHash<LlaveComparendo, Comparendo> tablaSeparateChaining = darTablaHashSeparateChaining();
+		Iterator<LlaveComparendo> resultado2 = tablaSeparateChaining.keys().iterator();
+		int j = 0;
+
+		while(resultado2.hasNext() && j <= 10000)
+		{
+			LlaveComparendo llavesExistente = resultado2.next();
+			LlaveComparendo llavesNoExistente = new LlaveComparendo(llavesExistente.getFecha_Hora(), "Particular", "C50");
+			int numeroAleatorio1 = (int) (Math.random()* 8000);
+			int numeroAleatorio2 = (int) (Math.random()* 2000);
+			
+			for(int i = 0; i <= numeroAleatorio1; i++)
+			{
+				tablaSeparateChaining.get(llavesExistente);
+			}
+			
+			for(int i = 0; i <= numeroAleatorio2; i++)
+			{
+				tablaSeparateChaining.get(llavesNoExistente);
+			}
+			
+			j++;
+		}
+		
 	}
 	
 }

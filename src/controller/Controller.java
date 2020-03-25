@@ -9,6 +9,7 @@ import java.util.Scanner;
 import model.Comparendo;
 import model.LlaveComparendo;
 import model.data_structures.LinearProbingHash;
+import model.data_structures.SeparateChainingHash;
 import model.logic.Modelo;
 import view.View;
 
@@ -65,6 +66,8 @@ public class Controller {
 				}
 				view.printMessage("El numero de duplas es 20, el arreglo inicial de 63 posiciones, arreglo final 21 posiciones, numero de rehashes 18, se utilizo un archivo de 20 de datos ya que el grande no corre en el computador (Linear Probing), los datos se obtuvieron de la implementacion haciendo calculos y sysouts para obtener la informacion.");
 				// TODO hacer lo mismo que la instrucion de arriba
+				
+				
 				view.printMessage("\n");
 				break;
 
@@ -121,8 +124,57 @@ public class Controller {
 				break;
 
 			case 3:
-				// TODO Requerimiento 2 - Hacer similar al de arriba creo que lo que cambia es la instrucion cuando se crea la tabla de hash
+				// TODO Requerimiento 2 
 				// Probar con la fecha 2018/11/11 , MOTOCICLETA , C38 
+				view.printMessage("Dado una fecha (año/mes/día), clase de vehículo e infracción retornar los comparendos que tengan esos valores.");
+				view.printMessage("Por favor ingrese la fecha en el formato yyyy/MM/dd : ");
+				String entrada4 = lector.next();
+				SimpleDateFormat df2 = new SimpleDateFormat("yyyy/MM/dd");
+		        Date testDate2 = null;
+		        String date2 = entrada4;
+		        try 
+		        {
+					testDate = df2.parse(date2);
+					view.printMessage("Por favor ingrese la clase del vehiculo: ");
+					String entrada5 = lector.next();
+					view.printMessage("Por favor ingrese el tipo de infraccion:");
+					String entrada6 = lector.next();
+					
+					view.printMessage("Los siguientes comparendos tienen los valores ingresados por el usuario: ");
+					LlaveComparendo nueva = new LlaveComparendo(testDate, entrada5, entrada6);
+					SeparateChainingHash<LlaveComparendo, Comparendo> separateChaining2 = modelo.darTablaHashSeparateChaining();
+					Iterator<LlaveComparendo> resultado2 = separateChaining2.keys().iterator();
+					Iterator<Comparendo> resultado3 = separateChaining2.vals().iterator();
+					
+					while(resultado2.hasNext() && resultado3.hasNext())
+					{
+						LlaveComparendo elemento1 = resultado2.next();
+						Comparendo elemento2 = resultado3.next();
+						SimpleDateFormat df3 = new SimpleDateFormat("yyyy/MM/dd");
+						String fechaN = df3.format(elemento1.getFecha_Hora());
+						Date testDate1 = df3.parse(fechaN);
+						
+						LlaveComparendo actual = new LlaveComparendo(testDate1, elemento1.getClase_Vehi(), elemento1.getInfraccion());
+						if(actual.equals(nueva))
+						{
+							view.printMessage(elemento2.getObjective() + ", " + elemento1.getFecha_Hora() + ", " + elemento2.getTipo_servi() + ", " + elemento1.getClase_Vehi() + ", " + elemento1.getInfraccion());
+						}
+					}	
+				} 
+		        catch (ParseException e) 
+		        {
+					e.printStackTrace();
+				}
+		        
+		        if(!df2.format(testDate2).equals(date2))
+		        {
+		            System.out.println("invalid date!!");
+		        } 
+		        else 
+		        {
+		            System.out.println("valid date");
+		        }
+		        view.printMessage("\n");
 				break;
 				
 			case 4:

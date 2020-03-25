@@ -18,6 +18,7 @@ import com.google.gson.stream.JsonReader;
 import model.Comparendo;
 import model.LlaveComparendo;
 import model.data_structures.LinearProbingHash;
+import model.data_structures.SeparateChainingHash;
 
 /**
  * Definicion del modelo del mundo
@@ -108,7 +109,27 @@ public class Modelo {
 		return tablaLinearProbing;
 	}
 	
-	// TODO Convertir la lista de objetos cargados en una tabla de hash - Separate Chainging
+	
+	// TODO Separate Chainging
+	
+	public SeparateChainingHash<LlaveComparendo, Comparendo> darTablaHashSeparateChaining()
+	{
+		SeparateChainingHash<LlaveComparendo, Comparendo> tablaSeparateChaining= new SeparateChainingHash<LlaveComparendo, Comparendo>();
+		datos1 = cargarDatos();
+
+		Iterator<Comparendo> it = datos1.iterator();
+		while(it.hasNext())
+		{
+			for(int i = 0; i < datos1.size(); i++)
+			{
+				Comparendo elementoActual = it.next();
+				tablaSeparateChaining.put(new LlaveComparendo(elementoActual.getFecha_hora(), elementoActual.getClase_vehi(), elementoActual.getInfraccion()), new Comparendo(elementoActual.getObjective(), elementoActual.getFecha_hora(), elementoActual.getDes_infrac(), elementoActual.getMedio_dete(), elementoActual.getClase_vehi(), elementoActual.getTipo_servi(), elementoActual.getInfraccion(), elementoActual.getLocalidad(), elementoActual.getMunicipio(), elementoActual.getLongitud(), elementoActual.getLatitud()));
+			}
+		}
+
+		return tablaSeparateChaining;
+	}
+	
 	
 	/**
 	 * Calcular el tiempo en hacer get en un rango de 0 a 10000, haciendo de la forma aleatoria, 8000 llaves existente y 2000 llaves no esxistentes

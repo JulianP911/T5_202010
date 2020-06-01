@@ -1,0 +1,7 @@
+# Taller_5_ED
+
+TALLER 5 ESTRUCTURA DE DATOS - HASH TABLE "LINEAL" Y "SEPARATE" GENERICA
+
+Integrante:
+- Julian Padilla Molina 201913677
+- Pablo Pastrana 201822920
